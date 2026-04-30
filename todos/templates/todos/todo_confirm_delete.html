@@ -1,0 +1,33 @@
+{% extends 'todos/base.html' %}
+
+{% block title %}Delete Todo{% endblock %}
+
+{% block content %}
+<div class="panel">
+    <div class="section-inner confirm-panel">
+        <div style="display:grid; gap: 16px; margin-bottom: 24px;">
+            <p style="text-transform: uppercase; letter-spacing: 0.35em; color: #fb7185; font-size: 0.8rem; margin: 0;">Confirm delete</p>
+            <h1 style="margin: 0; font-size: clamp(2rem, 3vw, 3rem);">Remove this todo?</h1>
+            <p style="margin: 0; color: #94a3b8; line-height: 1.8;">This action cannot be undone. If you want to keep the task, choose Cancel.</p>
+        </div>
+
+        <div style="display:grid; gap: 16px;">
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; padding: 20px;">
+                <p style="margin:0; color:#94a3b8;">Todo</p>
+                <p style="margin:8px 0 0; font-weight:700; color:#fff;">{{ object.title }}</p>
+                {% if object.description %}
+                    <p style="margin: 12px 0 0; color:#cbd5e1;">{{ object.description }}</p>
+                {% endif %}
+            </div>
+
+            <div class="page-actions" style="justify-content: flex-start;">
+                <form method="post" style="display:inline-block;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <a href="{% url 'todo_list' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
